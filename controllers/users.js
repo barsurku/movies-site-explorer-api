@@ -70,15 +70,17 @@ module.exports.updateUser = (req, res, next) => {
       runValidators: true,
     },
   )
-    .then((users) => {
-      if (!users) {
+    .then((user) => {
+      if (!user) {
         throw new NotFound('Пользователь с данным ID не найден');
       }
-      return res.status(200).send(users);
+      return res.send({ user });
     })
-
     .catch((err) => {
       if (err.name === 'ValidationError') {
+        return next(new BadRequest('Введены некорректные данные'));
+      }
+      if (err.kind === 'ObjectId') {
         return next(new BadRequest('Введены некорректные данные'));
       }
       return next(err);
