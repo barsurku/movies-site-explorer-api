@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const NotFound = require('../utils/error/notFound');
@@ -74,7 +75,7 @@ module.exports.updateUser = (req, res, next) => {
       if (!user) {
         throw new NotFound('Пользователь с данным ID не найден');
       }
-      return res.send({ user });
+      return res.status(200).send(user);
     })
 
     .catch((err) => {
