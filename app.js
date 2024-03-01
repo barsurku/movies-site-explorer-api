@@ -15,6 +15,8 @@ app.use(
     origin: [
       'http://localhost:3000',
       'https://moviesbars.nomoredomainsmonster.ru',
+      'http://moviesbars.nomoredomainsmonster.ru',
+      'https://api.moviesbars.nomoredomainsmonster.ru',
     ],
     credentials: true,
   }),
