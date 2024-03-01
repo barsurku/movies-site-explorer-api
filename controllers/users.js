@@ -86,12 +86,3 @@ module.exports.updateUser = (req, res, next) => {
       return next(err);
     });
 };
-
-module.exports.logout = (req, res, next) => {
-  const { email } = req.body;
-  User.findOne({ email })
-    .then(() => {
-      res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true }).send({ message: 'Logout is completed' });
-    })
-    .catch(next);
-};
